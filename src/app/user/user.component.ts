@@ -9,7 +9,7 @@ import { DUMMY_USERS } from './dummy-users';
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Input() user!: any;
+  @Input({ required: true }) user!: any;
   public onSelectUser() {}
 
   get imagePath() {
