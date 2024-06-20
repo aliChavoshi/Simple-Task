@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
+import { DUMMY_USERS } from './user/dummy-users';
 
 @Component({
   selector: 'app-root',
@@ -11,5 +12,5 @@ import { UserComponent } from './user/user.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'Simple-Task';
+  users = signal(DUMMY_USERS);
 }

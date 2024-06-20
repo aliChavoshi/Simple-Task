@@ -1,8 +1,6 @@
 <div>
-  @for (item of users(); track item.id) {
   <button (click)="onSelectUser()">
-    <img [src]="imagePath()" alt="{{ item.name }}" />
-    <span>{{ item.name }}</span>
+    <img [src]="imagePath" alt="{{ user.name }}" />
+    <span>{{ user.name }}</span>
   </button>
-  }
 </div>
