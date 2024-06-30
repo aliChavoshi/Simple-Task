@@ -2,7 +2,7 @@ import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './header/header.component';
 import { UserComponent } from './user/user.component';
-import { DUMMY_USERS, User } from './user/dummy-users';
+import { DUMMY_USERS, IUser } from './user/dummy-users';
 import { TasksComponent } from './tasks/tasks.component';
 
 @Component({
@@ -13,10 +13,10 @@ import { TasksComponent } from './tasks/tasks.component';
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  selectedUser = signal<User>({ avatar: '', id: '', name: '' });
-  users = signal<User[]>(DUMMY_USERS);
+  selectedUser = signal<IUser>({ avatar: '', id: '', name: '' });
+  users = signal<IUser[]>(DUMMY_USERS);
 
-  onSelectUser(id: string) {
-    this.selectedUser.set(this.users().find((user) => user.id === id));
+  onSelectUser(userId: string) {
+    this.selectedUser.set(this.users().find((user) => user.id === userId));
   }
 }

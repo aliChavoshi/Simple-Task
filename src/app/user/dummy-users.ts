@@ -1,4 +1,4 @@
-export const DUMMY_USERS: User[] = [
+export const DUMMY_USERS: IUser[] = [
   {
     id: 'u1',
     name: 'Jasmine Washington',
@@ -31,7 +31,7 @@ export const DUMMY_USERS: User[] = [
   },
 ];
 
-export interface User {
+export interface IUser {
   id: string;
   name: string;
   avatar: string;
