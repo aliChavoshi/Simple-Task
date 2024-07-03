@@ -17,7 +17,7 @@
 
    <!-- new version -->
    @if (selectedUser().name !== '') {
-   <app-tasks [name]="selectedUser().name" />
+   <app-tasks [user]="selectedUser()" />
    }@else{
    <p id="fallback">No user selected</p>
    }
