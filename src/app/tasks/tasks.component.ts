@@ -1,7 +1,7 @@
-import { Component, OnChanges, SimpleChanges, computed, input, signal } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, input, signal } from '@angular/core';
 import { TaskComponent } from './task/task.component';
-import { IUser } from '../user/dummy-users';
-import { ITask, dummyTasks } from './dummy-tasks';
+import { IUser } from '../user/users.model';
+import { ITask, dummyTasks } from './tasks.model';
 
 @Component({
    selector: 'app-tasks',

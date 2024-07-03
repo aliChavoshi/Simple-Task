@@ -4,16 +4,10 @@
    <ul id="users">
       @for (user of users(); track user.id) {
       <li>
-         <app-user [user]="user" (select)="onSelectUser($event)" />
+         <app-user [isSelected]="user.id == selectedUser().id" [user]="user" (selectedUserId)="onSelectUser($event)" />
       </li>
       }
    </ul>
-   <!-- Old Version Of NgFor -->
-   <!-- <ul id="users">
-      <li *ngFor="let user of users()">
-         <app-user [user]="user" (select)="onSelectUser($event)" />
-      </li>
-   </ul> -->
 
    <!-- new version -->
    @if (selectedUser().name !== '') {
@@ -21,10 +15,4 @@
    }@else{
    <p id="fallback">No user selected</p>
    }
-
-   <!-- Old Version of ngIf -->
-   <!-- <app-tasks *ngIf="selectedUser().name; else fallback" [name]="selectedUser().name" />
-   <ng-template #fallback>
-      <p id="fallback">No user selected</p>
-   </ng-template> -->
 </main>
