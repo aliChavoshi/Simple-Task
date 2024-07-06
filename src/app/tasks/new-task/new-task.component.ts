@@ -1,5 +1,6 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ITask } from '../tasks.model';
 
 @Component({
    selector: 'app-new-task',
@@ -12,14 +13,21 @@ export class NewTaskComponent {
    isOpened = input.required<boolean>();
    onCancelAddTask = output<boolean>();
    //create new a task
-   title = '';
-   dueDate = '';
-   summary = '';
+   title = signal('');
+   dueDate = signal('');
+   summary = signal('');
 
    closeDialog() {
       this.onCancelAddTask.emit(false);
    }
    createNewTask() {
-      throw new Error('Method not implemented.');
+      const newTask: ITask = {
+         dueDate: this.dueDate(),
+         summary: this.summary(),
+         title: this.title(),
+         id: '',
+         userId: ''
+      };
+      console.log('🚀 ~ NewTaskComponent ~ createNewTask ~ newTask:', newTask);
    }
 }
