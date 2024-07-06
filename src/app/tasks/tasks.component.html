@@ -12,7 +12,7 @@
 
    <ul>
       @for (task of taskOfUser(); track task.id) {
-      <li><app-task [task]="task"></app-task></li>
+      <li><app-task [task]="task" (deleteTask)="deleteTask($event)"></app-task></li>
       }
    </ul>
 </section>

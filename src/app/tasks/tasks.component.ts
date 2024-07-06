@@ -18,10 +18,19 @@ export class TasksComponent implements OnChanges {
    isAddedNewTask = signal(false);
 
    ngOnChanges(changes: SimpleChanges): void {
-      const tasks = this.allTasks().filter((t) => t.userId === this.user().id);
-      this.taskOfUser.set(tasks);
+      this.getTasksOfUser();
    }
+
    onStartAddTask() {
       this.isAddedNewTask.set(true);
+   }
+   deleteTask(taskId: string) {
+      var tasks = this.allTasks().filter((x) => x.id != taskId);
+      this.allTasks.set(tasks);
+      this.getTasksOfUser();
+   }
+   private getTasksOfUser() {
+      const tasks = this.allTasks().filter((t) => t.userId === this.user().id);
+      this.taskOfUser.set(tasks);
    }
 }
