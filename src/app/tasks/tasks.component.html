@@ -1,12 +1,14 @@
 @if (isAddedNewTask()) {
-<app-new-task [isOpened]="isAddedNewTask()" (onCancelAddTask)="isAddedNewTask.set($event)" />
+  <!-- add new task -->
+<app-new-task [isOpened]="isAddedNewTask()" (add)="AddNewTask($event)" (onCancelAddTask)="isAddedNewTask.set($event)" />
 }
 
+<!-- show all tasks -->
 <section id="tasks">
    <header>
       <h2>{{ user().name }}'s tasks</h2>
       <menu>
-         <button (click)="onStartAddTask()" type="button">Add Task</button>
+         <button (click)="isAddedNewTask.set(true)" type="button">Add Task</button>
       </menu>
    </header>
 

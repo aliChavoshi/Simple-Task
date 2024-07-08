@@ -6,12 +6,15 @@ import { ITask } from '../tasks.model';
    selector: 'app-new-task',
    standalone: true,
    imports: [FormsModule],
+
    templateUrl: './new-task.component.html',
    styleUrl: './new-task.component.css'
 })
 export class NewTaskComponent {
+   //outputs and inputs
    isOpened = input.required<boolean>();
    onCancelAddTask = output<boolean>();
+   add = output<ITask>();
    //create new a task
    title = signal('');
    dueDate = signal('');
@@ -20,14 +23,15 @@ export class NewTaskComponent {
    closeDialog() {
       this.onCancelAddTask.emit(false);
    }
-   createNewTask() {
+   onSubmit() {
       const newTask: ITask = {
          dueDate: this.dueDate(),
          summary: this.summary(),
          title: this.title(),
-         id: '',
+         id: 't4',
          userId: ''
       };
-      console.log('🚀 ~ NewTaskComponent ~ createNewTask ~ newTask:', newTask);
+      this.add.emit(newTask);
+      this.onCancelAddTask.emit(false);
    }
 }

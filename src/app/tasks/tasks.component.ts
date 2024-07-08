@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, input, signal } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, computed, input, signal } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { IUser } from '../user/users.model';
 import { ITask, dummyTasks } from './tasks.model';
@@ -11,26 +11,23 @@ import { NewTaskComponent } from './new-task/new-task.component';
    styleUrl: './tasks.component.css',
    imports: [TaskComponent, NewTaskComponent]
 })
-export class TasksComponent implements OnChanges {
+export class TasksComponent {
+   //all data
    allTasks = signal<ITask[]>(dummyTasks);
+   taskOfUser = computed(() => this.allTasks().filter((t) => t.userId === this.user().id));
+   //inputs
    user = input.required<IUser>();
-   taskOfUser = signal<ITask[]>([]);
+   //properties
    isAddedNewTask = signal(false);
 
-   ngOnChanges(changes: SimpleChanges): void {
-      this.getTasksOfUser();
-   }
-
-   onStartAddTask() {
-      this.isAddedNewTask.set(true);
+   AddNewTask(task: ITask) {
+      task.userId = this.user().id;
+      task.id = new Date().getTime().toString();
+      const tasks = [...this.allTasks(), task];
+      this.allTasks.set(tasks);
    }
    deleteTask(taskId: string) {
       var tasks = this.allTasks().filter((x) => x.id != taskId);
       this.allTasks.set(tasks);
-      this.getTasksOfUser();
-   }
-   private getTasksOfUser() {
-      const tasks = this.allTasks().filter((t) => t.userId === this.user().id);
-      this.taskOfUser.set(tasks);
    }
 }
