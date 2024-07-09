@@ -1,25 +1,27 @@
 <div class="backdrop" (click)="closeDialog()"></div>
-<dialog open>
-   <h2>Add Task</h2>
-   <form (submit)="onSubmit()">
-      <p>
-         <label for="title">Title</label>
-         <input type="text" id="title" name="title" [(ngModel)]="title" />
-      </p>
+<app-card>
+   <dialog open>
+      <h2>Add Task</h2>
+      <form (submit)="onSubmit()">
+         <p>
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" [(ngModel)]="title" />
+         </p>
 
-      <p>
-         <label for="summary">Summary</label>
-         <textarea id="summary" rows="5" name="summary" [(ngModel)]="summary"></textarea>
-      </p>
+         <p>
+            <label for="summary">Summary</label>
+            <textarea id="summary" rows="5" name="summary" [(ngModel)]="summary"></textarea>
+         </p>
 
-      <p>
-         <label for="due-date">Due Date</label>
-         <input type="date" id="due-date" name="dueDate" [(ngModel)]="dueDate" />
-      </p>
+         <p>
+            <label for="due-date">Due Date</label>
+            <input type="date" id="due-date" name="dueDate" [(ngModel)]="dueDate" />
+         </p>
 
-      <p class="actions">
-         <button type="button" (click)="closeDialog()">Cancel</button>
-         <button type="submit">Create</button>
-      </p>
-   </form>
-</dialog>
+         <p class="actions">
+            <button type="button" (click)="closeDialog()">Cancel</button>
+            <button type="submit">Create</button>
+         </p>
+      </form>
+   </dialog>
+</app-card>

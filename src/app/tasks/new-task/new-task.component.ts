@@ -1,11 +1,12 @@
 import { Component, input, output, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ITask } from '../tasks.model';
+import { CardComponent } from "../../Shared/card/card.component";
 
 @Component({
    selector: 'app-new-task',
    standalone: true,
-   imports: [FormsModule],
+   imports: [FormsModule, CardComponent],
 
    templateUrl: './new-task.component.html',
    styleUrl: './new-task.component.css'
