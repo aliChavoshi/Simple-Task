@@ -3,7 +3,8 @@ import { TaskComponent } from './task/task.component';
 import { IUser } from '../user/users.model';
 import { ITask, dummyTasks } from './tasks.model';
 import { NewTaskComponent } from './new-task/new-task.component';
-import { CardComponent } from "../Shared/card/card.component";
+import { CardComponent } from '../Shared/card/card.component';
+import { TaskService } from './task.service';
 
 @Component({
    selector: 'app-tasks',
@@ -13,22 +14,19 @@ import { CardComponent } from "../Shared/card/card.component";
    imports: [TaskComponent, NewTaskComponent, CardComponent]
 })
 export class TasksComponent {
+   constructor(private taskService: TaskService) {}
    //all data
-   allTasks = signal<ITask[]>(dummyTasks);
-   taskOfUser = computed(() => this.allTasks().filter((t) => t.userId === this.user().id));
+   allTasks = signal<ITask[]>(this.taskService.getTasks());
+   taskOfUser = computed(() => this.taskService.getUserTasks(this.user().id));
    //inputs
    user = input.required<IUser>();
    //properties
    isAddedNewTask = signal(false);
 
    AddNewTask(task: ITask) {
-      task.userId = this.user().id;
-      task.id = new Date().getTime().toString();
-      const tasks = [...this.allTasks(), task];
-      this.allTasks.set(tasks);
+      this.taskService.addTask(task, this.user().id);
    }
    deleteTask(taskId: string) {
-      var tasks = this.allTasks().filter((x) => x.id != taskId);
-      this.allTasks.set(tasks);
+      this.taskService.removeTask(taskId);
    }
 }
