@@ -1,11 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { effect, Injectable, signal } from '@angular/core';
 import { dummyTasks, ITask } from './tasks.model';
 
 @Injectable({
    providedIn: 'root'
 })
 export class TaskService {
-   tasks = signal(dummyTasks);
+   tasks = signal<ITask[]>(this.dummyTasks());
+   saveInLocalStorage = effect(() => {
+      localStorage.setItem('tasks', JSON.stringify(this.tasks()));
+   });
 
    constructor() {}
 
@@ -24,5 +27,14 @@ export class TaskService {
    removeTask(id: string) {
       const tasks = this.tasks().filter((x) => x.id !== id);
       this.tasks.set(tasks);
+   }
+
+   private dummyTasks(): ITask[] {
+      if (localStorage.getItem('tasks')) {
+         const stringData = localStorage.getItem('tasks');
+         const tasks = JSON.parse(stringData) as ITask[];
+         return tasks;
+      }
+      return dummyTasks;
    }
 }

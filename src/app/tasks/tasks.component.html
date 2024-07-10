@@ -5,7 +5,6 @@
 
 <!-- show all tasks -->
 <app-card>
-   @if(taskOfUser().length>0){
    <section id="tasks">
       <header>
          <h2>{{ user().name }}'s tasks</h2>
@@ -20,7 +19,4 @@
          }
       </ul>
    </section>
-   }@else{
-   <div>{{ user().name }} doesn't have any tasks.</div>
-   }
 </app-card>
