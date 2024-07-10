@@ -22,8 +22,4 @@ export class TasksComponent {
    user = input.required<IUser>();
    //signals
    close = signal(false);
-
-   deleteTask(taskId: string) {
-      this.taskService.removeTask(taskId);
-   }
 }
