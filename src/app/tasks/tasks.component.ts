@@ -20,12 +20,9 @@ export class TasksComponent {
    taskOfUser = computed(() => this.taskService.getUserTasks(this.user().id));
    //inputs
    user = input.required<IUser>();
-   //properties
-   isAddedNewTask = signal(false);
+   //signals
+   close = signal(false);
 
-   AddNewTask(task: ITask) {
-      this.taskService.addTask(task, this.user().id);
-   }
    deleteTask(taskId: string) {
       this.taskService.removeTask(taskId);
    }

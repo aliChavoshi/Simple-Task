@@ -1,7 +1,8 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ITask } from '../tasks.model';
-import { CardComponent } from "../../Shared/card/card.component";
+import { CardComponent } from '../../Shared/card/card.component';
+import { TaskService } from '../task.service';
 
 @Component({
    selector: 'app-new-task',
@@ -12,27 +13,27 @@ import { CardComponent } from "../../Shared/card/card.component";
    styleUrl: './new-task.component.css'
 })
 export class NewTaskComponent {
+   private taskService = inject(TaskService);
    //outputs and inputs
-   isOpened = input.required<boolean>();
-   onCancelAddTask = output<boolean>();
-   add = output<ITask>();
+   userId = input.required<string>();
+   close = output<boolean>();
    //create new a task
    title = signal('');
    dueDate = signal('');
    summary = signal('');
 
    closeDialog() {
-      this.onCancelAddTask.emit(false);
+      this.close.emit(false);
    }
    onSubmit() {
       const newTask: ITask = {
          dueDate: this.dueDate(),
          summary: this.summary(),
          title: this.title(),
-         id: 't4',
-         userId: ''
+         id: new Date().getTime().toString(),
+         userId: this.userId()
       };
-      this.add.emit(newTask);
-      this.onCancelAddTask.emit(false);
+      this.taskService.addTask(newTask, this.userId());
+      this.close.emit(false);
    }
 }
