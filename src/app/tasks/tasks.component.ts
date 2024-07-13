@@ -1,7 +1,7 @@
 import { Component, computed, input, signal } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { IUser } from '../user/users.model';
-import { ITask, dummyTasks } from './tasks.model';
+import { ITask } from './tasks.model';
 import { NewTaskComponent } from './new-task/new-task.component';
 import { CardComponent } from '../Shared/card/card.component';
 import { TaskService } from './task.service';
